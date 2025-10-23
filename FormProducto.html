@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Producto</title>
+    
+  </head>
+  
+<body>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>  
+
+<form action="./Script_PHP/guardar.php" method="POST" name="FormProducto">
+
+  <fieldset id="Datos_Basicos">
+    <legend>Datos Básicos</legend>
+    
+	Nombre del Producto
+    <input id="Basico1" type="text" value="" name="txtNombre" autofocus required>
+    <br>
+	<br>
+	
+	Descripción<br>
+    <textarea id="Basico2" maxlength="50" name="txtaDescripcion" required></textarea>
+    
+	<br><br>
+    Foto:
+    <br> <input id="Basico3" type="file" name="foto" required>
+    
+	<br><br>
+    <input id="Basico4" type="checkbox" name="ckboxLogistica" value="Logistica">Añadir información confidencial
+    
+  </fieldset>
+  
+  <br>
+  
+  <fieldset>
+    <legend>Datos Económicos</legend>
+		<table align="left" border="0">
+		  <tr>
+		  		<td>Precio: </td>
+				<td> <input id="Económico1" type="number" value="" min="100" max="200" required> </td>
+		  
+				<td>$</td>
+				<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+				<td>Impuestos: </td>
+				<td>
+          <select name="cmbImpuesto" id="Económico2">
+  					<option value="4">4%</option>
+  					<option value="7">7%</option>
+  					<option value="16">16%</option>
+  					<option value="25">25%</option>
+				  </select></td>
+		  </tr>
+		</table>		
+	<br><br>
+    <label>Promoción</label><br>
+    <input type="radio" name="rbPromocion" value="Ninguno" id="Económico3" checked>Ninguno  <br>
+    <input type="radio" name="rbPromocion" value="Gratuito" id="Económico3">Tranporte Gratuito<br>
+    <input type="radio" name="rbPromocion" value="Descuento" id="Económico3">Descuento 5%<br>
+  </fieldset>
+  
+  <br>
+  <input type="submit" name="btnGuardar" value="Guardar Cambios">
+  <input type="reset" name="btnReset" value="Borrar los datos introducidos">
+  <br><br><br>
+  <a href="index.html">Regresar</a>
+
+
+  </form>
+
+  </body>
+</html>

@@ -1,0 +1,69 @@
+<script type="text/javascript">
+  function mov(x){
+    if(x==1){
+      divCDR = document.getElementById('confi');
+      divCDR.style.display = "";
+    }else{
+      divCDR = document.getElementById('confi');
+      divCDR.style.display = "none";
+    }
+  }
+</script>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>LOGISTICA</title>
+  </head>
+  <body>
+    <form action="CodigoNuevo/Parte I/guardarDireccion.php" method="POST">
+       <fieldset>
+         <legend>DIRECCION DE ENVIO</legend>
+         Calle Principal <br>
+         <input type="text" name="txtPrincipal" value="">
+         <br><br>
+         Transversal<br>
+         <input type="text" name="txtTransversal" value="">
+
+		<br><br>
+		    <input type="radio" name="chbEntrega" value="PROPIETARIO" onclick="SubmitDireccion.disabled = !this.checked;mov(0)"> Entrega al propietario.<br>
+        <input type="radio" name="chbEntrega" value="TERCERO" onclick="SubmitDireccion.disabled = this.checked; mov(1)"> Entrega a un tercero.
+
+         <br><br>
+         Cantones: <select  name="cmbCantones">
+		      <optgroup label="PICHINCHA">
+					<option value="Quito">Quito</option>
+					<option value="Rumiñahui">Rumiñahui</option>
+					<option value="Mejia">Mejia</option>
+             </optgroup>
+
+			 <optgroup label="GUAYAS">
+					<option value="Guayaquil">Guayaquil</option>
+					<option value="Santa Elena">Santa Elena</option>
+					<option value="Salinas">Salinas</option>
+             </optgroup>
+
+         </select>
+
+         <br><br>
+           <input type="submit" name="SubmitDireccion" value="ENVIAR DATOS">
+       </fieldset>
+
+	      <br>
+        <div id="confi" style="display: none;">
+       <fieldset>
+         <legend>INFORMACIÓN CONFIDENCIAL</legend>
+         Código Postal:
+         <input type="password" name="pswCodigoPostal" value="">
+
+		       <br><br>
+         Referencia de la Dirección:<br>
+         <textarea name="Mensaje" rows="3" cols="30" id="Mensaje"></textarea><br>
+         <br>
+           <input type="submit" name="SubmitConfidencial" value="Guardar">
+       </fieldset>
+      </div>
+    </form>
+    <p>If you click the "Guardar" button, the form-data will be sent to a page called "/codigo-post.php"</p>
+  </body>
+</html>
