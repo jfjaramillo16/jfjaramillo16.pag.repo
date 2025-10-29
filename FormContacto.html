@@ -1,27 +1,42 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>Contacto PARTE III</title>
-    <meta name="viewport" content="width=device-width, user-scaleble=no,
-    initial-scale=1, maximum-scale=1,minimum-scale=1">
-
-    <link rel="stylesheet" href="../../Recursos/MisEstilos.css">
-
-    <script src="validar.js"></script>
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1"
+    />
+    <link rel="stylesheet" href="Recursos/MisEstilos.css" />
+    <script src="js/validar.js"></script>
   </head>
 
   <body>
-    <form action="#" method="post" class="FormContactoEnviado"  onsubmit="validar();">
+    <form id="formContacto" class="FormContactoEnviado">
       <h2>Contacto</h2>
-      <p>Correo Electronico</p>
-      <input type="text" id="txtEmail" name="txtEmail" placeholder="&#9993; usuario@mail.com" required>
+
+      <p>Correo Electrónico</p>
+      <input
+        type="text"
+        id="txtEmail"
+        name="txtEmail"
+        placeholder="&#9993; usuario@mail.com"
+        required
+      />
+
       <p>Fecha de Nacimiento</p>
-      <input type="date"  name="txtFecha">
+      <input type="date" id="txtFecha" name="txtFecha" required />
+
       <p>Teléfono</p>
-      <input type="text" id="txtTelefono" name="txtTelefono" placeholder="&#9742; Telefono" required>
-      <input type="submit" id="btnEnviar" value="Enviar" >
+      <input
+        type="text"
+        id="txtTelefono"
+        name="txtTelefono"
+        placeholder="&#9742; Teléfono"
+        required
+      />
+
+      <input type="submit" id="btnEnviar" value="Enviar" />
     </form>
   </body>
-
 </html>

@@ -1,62 +1,164 @@
-
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>LOGISTICA</title>
   </head>
   <body>
-    <form action="./Script_PHP/registrar.php" method="POST" name="FormDireccion" target="_blank">
-       <fieldset> <!--agrupa varios elementos del form-->
-         <legend>DIRECCION DE ENVIO</legend>
-         Calle Principal <br>
-         <input type="text" name="txtPrincipal" value="">
-         <br><br>
-         Transversal<br>
-         <input type="text" name="txtTransversal" value="">
-        
-		<br><br>
-		    <input type="checkbox" name="chbEntrega1" value="PROPIETARIO"checked> Entrega al propietario.<br>
-        <input type="checkbox" name="chbEntrega2" value="TERCERO"> Entrega a un tercero.
-        
-         <br><br>
-         Cantones: <select  name="cmbCantones">
-		      <optgroup label="PICHINCHA">
-					<option value="Q">Quito</option>
-					<option value="R">Rumiñahui</option>
-					<option value="M">Pedro Vicente Maldonado</option>
-             </optgroup>
-			 
-			 <optgroup label="GUAYAS">
-					<option value="G">Guayaquil</option>
-					<option value="S">Santa Elena</option>
-					<option value="SL">Salinas</option>
-             </optgroup>
-			 
-         </select>
-		 
-         <br><br>
-           <input type="submit" name="SubmitDireccion" value="Enviar Datos">
-       </fieldset>
+    <form
+      action="./Script_PHP/registrar.php"
+      method="POST"
+      name="FormDireccion"
+      target="_blank"
+    >
+      <fieldset>
+        <legend>DIRECCION DE ENVIO</legend>
+        Calle Principal <br />
+        <input type="text" name="txtPrincipal" value="" />
+        <br /><br />
+        Transversal<br />
+        <input type="text" name="txtTransversal" value="" />
+        <br /><br />
+        <input
+          type="checkbox"
+          name="chbEntrega1"
+          value="PROPIETARIO"
+          checked
+        />
+        Entrega al propietario.<br />
+        <input type="checkbox" name="chbEntrega2" value="TERCERO" />
+        Entrega a un tercero.
+        <br /><br />
+        Cantones:
+        <select name="cmbCantones">
+          <optgroup label="PICHINCHA">
+            <option value="Q">Quito</option>
+            <option value="R">Rumiñahui</option>
+            <option value="M">Pedro Vicente Maldonado</option>
+          </optgroup>
+
+          <optgroup label="GUAYAS">
+            <option value="G">Guayaquil</option>
+            <option value="S">Santa Elena</option>
+            <option value="SL">Salinas</option>
+          </optgroup>
+        </select>
+
+        <br /><br />
+        <input type="submit" name="SubmitDireccion" value="Enviar Datos" />
+      </fieldset>
     </form>
-	
-	<br>
-    <form action="./Script_PHP/procesa.php" method="POST" name="FormConfidencial" target="_blank">
-      <br>  
-       <fieldset>
-         <legend>INFORMACIÓN CONFIDENCIAL</legend>
-         Código Postal: 
-         <input type="password" name="pswCodigoPostal" value="">
-         
-		 <br><br>
-         Referencia de la Dirección:<br>
-         <textarea name="Mensaje" rows="3" cols="30" id="Mensaje"></textarea><br>
-         <br>
-           <input type="submit" name="SubmitConfidencial" value="Guardar">
-       </fieldset>
+
+    <br />
+    <form
+      action="./Script_PHP/procesa.php"
+      method="POST"
+      name="FormConfidencial"
+      target="_blank"
+    >
+      <fieldset>
+        <legend>INFORMACIÓN CONFIDENCIAL</legend>
+        Código Postal:
+        <input type="password" name="pswCodigoPostal" value="" />
+
+        <br /><br />
+        Referencia de la Dirección:<br />
+        <textarea name="Mensaje" rows="3" cols="30" id="Mensaje"></textarea
+        ><br /><br />
+        <input type="submit" name="SubmitConfidencial" value="Guardar" />
+      </fieldset>
     </form>
-    <br><br>
+
+    <br /><br />
     <a href="index.html">Regresar</a>
-    
+
+    <!-- 🔽 VALIDACIÓN + GUARDADO LOCAL -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const formDireccion = document.forms["FormDireccion"];
+        const formConfidencial = document.forms["FormConfidencial"];
+
+        // === DIRECCIÓN ===
+        if (formDireccion) {
+          formDireccion.addEventListener("submit", function (e) {
+            const principal = this.txtPrincipal.value.trim();
+            const transversal = this.txtTransversal.value.trim();
+            const canton = this.cmbCantones.value;
+
+            if (principal === "" || transversal === "" || canton === "") {
+              e.preventDefault();
+              alert("❌ Por favor completa todos los campos de dirección.");
+              return;
+            }
+
+            const direccion = {
+              principal,
+              transversal,
+              entrega1: this.chbEntrega1.checked,
+              entrega2: this.chbEntrega2.checked,
+              canton,
+            };
+
+            localStorage.setItem(
+              "registro_direccion",
+              JSON.stringify(direccion)
+            );
+            console.log("📦 Dirección guardada localmente:", direccion);
+
+            let resumen = `
+✅ Dirección guardada correctamente en el navegador.
+
+📍 Datos almacenados:
+---------------------------------
+🏠 Calle Principal: ${direccion.principal}
+🚧 Transversal: ${direccion.transversal}
+🏙️ Cantón: ${direccion.canton}
+👤 Entrega al propietario: ${direccion.entrega1 ? "Sí" : "No"}
+👥 Entrega a un tercero: ${direccion.entrega2 ? "Sí" : "No"}
+---------------------------------
+`;
+            alert(resumen);
+          });
+        }
+
+        // === CONFIDENCIAL ===
+        if (formConfidencial) {
+          formConfidencial.addEventListener("submit", function (e) {
+            const codigo = this.pswCodigoPostal.value.trim();
+            const referencia = this.Mensaje.value.trim();
+
+            if (codigo === "" || referencia === "") {
+              e.preventDefault();
+              alert("❌ Por favor completa todos los campos confidenciales.");
+              return;
+            }
+
+            if (codigo.length < 4) {
+              e.preventDefault();
+              alert("❌ El código postal debe tener al menos 4 caracteres.");
+              return;
+            }
+
+            const confidencial = { codigoPostal: codigo, referencia };
+            localStorage.setItem(
+              "registro_confidencial",
+              JSON.stringify(confidencial)
+            );
+            console.log("🔒 Confidencial guardado localmente:", confidencial);
+
+            let resumen = `
+✅ Información confidencial guardada correctamente.
+
+🔐 Datos almacenados:
+---------------------------------
+📮 Código Postal: ${confidencial.codigoPostal}
+🗒️ Referencia: ${confidencial.referencia}
+---------------------------------
+`;
+            alert(resumen);
+          });
+        }
+      });
+    </script>
   </body>
 </html>

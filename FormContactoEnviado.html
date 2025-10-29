@@ -1,27 +1,50 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>Formulario de Contacto Enviado</title>
-    <meta name="viewport" content="width=device-width, user-scaleble=no,
-    initial-scale=1, maximum-scale=1,minimum-scale=1">
-
-    <link rel="stylesheet" href="../../Recursos/MisEstilos.css">
-
-    <!--<script src="validar.js"></script>-->
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1"
+    />
+    <link rel="stylesheet" href="Recursos/MisEstilos.css" />
   </head>
 
   <body>
-    <form action="#" method="post">
+    <form>
       <h2>Contacto Enviado</h2>
-      <p>Correo Electronico</p>
-      <input type="text" id="txtEmail" name="txtEmail" placeholder="&#9993; usuario@mail.com" required>
-      <p>Fecha de Nacimiento</p>
-      <input type="date"  name="txtFecha">
-      <p>Teléfono</p>
-      <input type="text" id="txtTelefono" name="txtTelefono" placeholder="&#9742; Telefono" required>
-      <input type="submit" id="btnEnviar" value="Enviado los datos correctamente" disabled>
-    </form>
-  </body>
 
+      <p>Correo Electrónico</p>
+      <input type="text" id="txtEmail" readonly />
+
+      <p>Fecha de Nacimiento</p>
+      <input type="date" id="txtFecha" readonly />
+
+      <p>Teléfono</p>
+      <input type="text" id="txtTelefono" readonly />
+
+      <input
+        type="button"
+        id="btnLimpiar"
+        value="Limpiar Datos y Regresar"
+        onclick="limpiarDatos()"
+      />
+    </form>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const datos = JSON.parse(localStorage.getItem("contacto_usuario"));
+        if (datos) {
+          document.getElementById("txtEmail").value = datos.email;
+          document.getElementById("txtTelefono").value = datos.telefono;
+          document.getElementById("txtFecha").value = datos.fecha;
+        }
+      });
+
+      function limpiarDatos() {
+        localStorage.removeItem("contacto_usuario");
+        window.location.href = "FormContacto.html";
+      }
+    </script>
+  </body>
 </html>
